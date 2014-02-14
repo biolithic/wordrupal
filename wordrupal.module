@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * 
+ */
+
+/**
+ * Implements hook_help().
+ */
+function wordrupal_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#wordrupal':
+      return t('<p>This module changes Drupal into Wordpress to fool your friends.</p>');
+    case 'admin/settings/wordrupal':
+      return t('This module changes Drupal into Wordpress to fool your friends.');
+  }
+}
+
+
+/**
+ * Implements hook_init().
+ */
+function wordrupal_init() {
+  if ($_GET['q'] == "wordrupal")
+  {
+  drupal_add_css(drupal_get_path('module', 'wordrupal') . '/wordrupal.css');
+  drupal_add_js(drupal_get_path('module', 'wordrupal') . '/wordrupal.js');
+  drupal_set_message('Hello PhotoMatt!');
+  }
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function wordrupal_menu() {
+  $items = array();
+
+    $items['wordrupal'] = array(
+      'title' => 'Welcome to your new WordPress site!',
+      'page callback' => 'wordrupal_render_array',
+       'access callback' => TRUE,
+      'type' => MENU_NORMAL_ITEM,
+    );
+  return $items;
+}
+
+/**
+ * Menu callback; page callback returning a render array.
+ */
+function wordrupal_render_array() {
+  $build = array(
+    'string_paragraph' => array(
+      '#type' => 'markup',
+      '#markup' => '<p>If you need help getting started, check out our documentation on First Steps with WordPress. If youd rather dive right in, here are a few things most people do first when they set up a new WordPress site. If you need help, use the Help tabs in the upper right corner to get information on how to use your current screen and where to go for more assistance.</p>',
+    ),
+    'why_render_arrays' => array(
+      '#items' => array('This is a render array', 'This is a module generated list.'),
+      '#title' => 'Whatever camp this is, both CMS systems are great',
+      '#theme' => 'item_list',
+    ),
+  );
+return $build;
+}

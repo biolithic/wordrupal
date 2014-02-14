@@ -1,0 +1,11 @@
+name = wordrupal
+description = "This module changes Drupal into Wordpress to fool your friends."
+core = 7.x
+configure = admin/config/wordrupal
+
+; Information added by drupal.org packaging script on 2012-11-01
+version = "7.x-1.0-rc5"
+core = "7.x"
+project = "wordrupal"
+datestamp = "1351786623"
+
